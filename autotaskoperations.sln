@@ -13,16 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F88C24D3-5ED6-44BF-AAB9-6122D995EF6E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FFD276D8-DEA5-4B17-A002-F8C4A78F1745}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AE9C53EA-F541-4003-A908-B08844348D32}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Autotask", "src\Autotask\Autotask.xproj", "{0E53D257-26AE-48C7-AA9E-80ED55C216A5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{A183EA92-8669-47A8-9C33-9CC93BF3B26B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{751809D8-FAC8-4D2A-AD54-F306337F4E89}"
 	ProjectSection(SolutionItems) = preProject
-		pack.bat = pack.bat
+		nupkg\pack.bat = nupkg\pack.bat
 	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Autotask", "Autotask\Autotask.xproj", "{0E53D257-26AE-48C7-AA9E-80ED55C216A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +37,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0E53D257-26AE-48C7-AA9E-80ED55C216A5} = {F88C24D3-5ED6-44BF-AAB9-6122D995EF6E}
+		{0E53D257-26AE-48C7-AA9E-80ED55C216A5} = {FFD276D8-DEA5-4B17-A002-F8C4A78F1745}
 	EndGlobalSection
 EndGlobal
