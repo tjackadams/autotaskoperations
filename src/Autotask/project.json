@@ -14,6 +14,6 @@
     "summary": "This is a set of tools to interface with the Autotask Api.",
     "tags": [ "autotask" ]
   },
-  "title": "Autotask Tools", 
+  "title": "Autotask Operations", 
   "version": "0.0.1-*"
 }
