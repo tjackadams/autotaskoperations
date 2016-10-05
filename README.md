@@ -1,7 +1,7 @@
 Autotask Operations
 ===================
 
-AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/24ymfwe6949bx7qp/branch/master?svg=true)](https://ci.appveyor.com/project/ThomasAdams/autotaskoperations/branch/master)
+Status: [![Build status](https://ci.appveyor.com/api/projects/status/24ymfwe6949bx7qp/branch/master?svg=true)](https://ci.appveyor.com/project/ThomasAdams/autotaskoperations/branch/master) [![NuGet](https://img.shields.io/nuget/v/Autotask.svg)](https://www.nuget.org/packages/Autotask/)
 
 Purpose?
 --------
