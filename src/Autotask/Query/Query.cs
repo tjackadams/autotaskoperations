@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Autotask.Extensions;
 using System.Text.RegularExpressions;
 
+
 namespace Autotask.Query
 {
     /// <summary>

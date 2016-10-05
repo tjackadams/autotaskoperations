@@ -1,18 +1,25 @@
 {
   "authors": [ "Thomas Adams" ],
-  "dependencies": {
-    "NETStandard.Library": "1.6.0"
-  },
   "description": "This is a set of unofficial tools to interface with the Autotask Api. http://www.autotask.com/",
   "frameworks": {
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      }
+    },
+    "net452": {
+      "frameworkAssemblies": {
+        "System.Xml.Linq": "4.0.0.0"
+      }
     }
   },
   "packOptions": {
     "owners": ["Thomas Adams"],
     "summary": "This is a set of tools to interface with the Autotask Api.",
     "tags": [ "autotask" ]
+  },
+  "dependencies": {
   },
   "title": "Autotask Operations", 
   "version": "0.0.1-*"
