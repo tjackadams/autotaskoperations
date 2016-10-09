@@ -64,7 +64,7 @@ namespace Autotask.Query
             {
                 var currentText = queryText[i];
 
-                if (operators.Contains(currentText))
+                if (operators.Contains(currentText,StringComparer.OrdinalIgnoreCase))
                 {
                     // element is an operator. Add a condition tag with
                     // attribute 'operator' set to the value of element
@@ -90,12 +90,12 @@ namespace Autotask.Query
 
 
                 }
-                else if (currentText == "end")
+                else if (string.Equals(currentText,"end",StringComparison.OrdinalIgnoreCase))
                 {
                     node = node?.Parent;
 
                 }
-                else if (conditions.Contains(currentText))
+                else if (conditions.Contains(currentText, StringComparer.OrdinalIgnoreCase))
                 {
                     // element is a condition. Add an expression tag with
                     // attribute 'op' set to the value of the element
@@ -106,7 +106,7 @@ namespace Autotask.Query
                     node?.Add(expression);
 
                     // not all conditions need a value
-                    if (!noValueNeededCondition.Contains(currentText))
+                    if (!noValueNeededCondition.Contains(currentText, StringComparer.OrdinalIgnoreCase))
                     {
                         // increase pointer and add next element as
                         // value to expression
@@ -190,5 +190,5 @@ namespace Autotask.Query
 
             return xml;
         }
-    }
+    } 
 }
