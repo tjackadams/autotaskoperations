@@ -7,9 +7,9 @@
     "Autotask": {
       "target": "project"
     },
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Shouldly": "2.8.2",
     "System.Runtime.Serialization.Primitives": "4.3.0",
-    "dotnet-test-xunit": "1.0.0-rc2-192208-24",
     "xunit": "2.2.0"
   },
   "testRunner": "xunit",
