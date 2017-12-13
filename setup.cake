@@ -17,7 +17,7 @@ BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context,
                             dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Autotask/**/*.AssemblyInfo.cs",  BuildParameters.RootDirectoryPath + "/test/Autotask.Tests/**/*.AssemblyInfo.cs" },
-                            testCoverageFilter: "+[Autotask.Operations]*",
+                            testCoverageFilter: "+[*]*",
                             testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
                             testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
 
