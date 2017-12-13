@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Wyam</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Wyam.NuGetSettings">
+            <summary>
+            Settings for specifying NuGet packages.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.NuGetSettings.Prerelease">
+            <summary>
+            Specifies that prerelease packages are allowed.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.NuGetSettings.Unlisted">
+            <summary>
+            Specifies that unlisted packages are allowed.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.NuGetSettings.Exclusive">
+            <summary>
+            Indicates that only the specified package source(s) should be used to find the package.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.NuGetSettings.Version">
+            <summary>
+            Specifies the version of the package to use.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.NuGetSettings.Source">
+            <summary>
+            Specifies the package source(s) to get the package from.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.NuGetSettings.Package">
+            <summary>
+            The package to install.
+            </summary>
+        </member>
+        <member name="T:Cake.Wyam.WyamAliases">
+            <summary>
+            <para>Contains functionality related to <see href="https://github.com/Wyamio/Wyam">Wyam</see>.</para>
+            <para>
+            In order to use the commands for this alias, include the following in your build.cake file to download and install from NuGet.org, or specify the ToolPath within the WyamSettings class:
+            <code>
+            #addin "nuget:?package=Cake.Wyam"
+            #tool "nuget:?package=Wyam"
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="M:Cake.Wyam.WyamAliases.Wyam(Cake.Core.ICakeContext)">
+            <summary>
+            Runs Wyam using the specified settings.
+            </summary>
+            <param name="context">The context.</param>
+            <example>
+            <code>
+                Wyam();
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Wyam.WyamAliases.Wyam(Cake.Core.ICakeContext,Cake.Wyam.WyamSettings)">
+            <summary>
+            Runs Wyam using the specified settings.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <code>
+                Wyam(new WyamSettings()
+                {
+                    OutputPath = Directory("C:/Output")
+                });
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Wyam.WyamRunner">
+            <summary>
+            The Wyam Runner used to execute the Wyam Executable
+            </summary>
+        </member>
+        <member name="M:Cake.Wyam.WyamRunner.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Wyam.WyamRunner" /> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="locator">The tool locator.</param>
+        </member>
+        <member name="M:Cake.Wyam.WyamRunner.Run(Cake.Wyam.WyamSettings)">
+            <summary>
+            Publishes a Vsce package from the provided settings.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Cake.Wyam.WyamRunner.GetToolName">
+            <summary>
+            Gets the name of the tool.
+            </summary>
+            <returns>The name of the tool.</returns>
+        </member>
+        <member name="M:Cake.Wyam.WyamRunner.GetToolExecutableNames">
+            <summary>
+            Gets the possible names of the tool executable.
+            </summary>
+            <returns>The tool executable name.</returns>
+        </member>
+        <member name="T:Cake.Wyam.WyamSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.Wyam.WyamRunner"/>.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Watch">
+            <summary>
+            Gets or sets a value indicating whether to enable watching of input folder for changes to files.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Attach">
+            <summary>
+            Pauses execution while waiting for a debugger to attach.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Preview">
+            <summary>
+            Gets or sets a value indicating whether to enable previewing of the generated content in built in web server.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.PreviewPort">
+            <summary>
+            Gets or sets a value indicating the port number to use for previewing.
+            </summary>
+            <remarks>Default is 5080</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.PreviewForceExtensions">
+            <summary>
+            Gets or sets a value indicating whether to enable forcing of using file extensions.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.PreviewVirtualDirectory">
+            <summary>
+            Gets or sets a value indicating the virtual directory to use for the preview server.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.PreviewRoot">
+            <summary>
+            The path to the root of the preview server, if not the output folder.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.InputPaths">
+            <summary>
+            Gets or sets a value indicating the input paths that should be used while running Wyam.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.OutputPath">
+            <summary>
+            Gets or sets a value indicating the output path that should be used while running Wyam.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.ConfigurationFile">
+            <summary>
+            Gets or sets a value indicating the configuration file that should be used while running Wyam.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.UpdatePackages">
+            <summary>
+            Gets or sets a value indicating whether to enable updating of packages.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.UseLocalPackages">
+            <summary>
+            Gets or sets a value indicating whether to use a local NuGet packages folder.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.UseGlobalSources">
+            <summary>
+            Toggles the use of the global NuGet sources.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.PackagesPath">
+            <summary>
+            Gets or sets the packages path to use.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.OutputScript">
+            <summary>
+            Gets or sets a value indicating whether to output the script at end of execution.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.VerifyConfig">
+            <summary>
+            Compile the configuration but do not execute.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.NoClean">
+            <summary>
+            Gets or sets a value indicating whether to prevent cleaning of the output path on each execution if <c>true</c>.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.NoCache">
+            <summary>
+            Gets or sets a value indicating whether to turn off the caching mechanism on all modules if <c>true</c>.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Verbose">
+            <summary>
+            Gets or sets a value indicating whether to run in verbose mode.
+            </summary>
+            <remarks>Default is false</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Settings">
+            <summary>
+            Gets or sets metadata settings.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.LogFilePath">
+            <summary>
+            Gets or sets the path to the Wyam log file.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.RootPath">
+            <summary>
+            Gets or sets the The folder (or config file) to use as the root.
+            </summary>
+            <remarks>Default is the current working directory</remarks>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.NuGetPackages">
+            <summary>
+            Adds NuGet packages (downloading and installing them if needed).
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.NuGetSources">
+            <summary>
+            Specifies additional package sources to use.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Assemblies">
+            <summary>
+            Adds references to multiple assemblies by name, file name, or globbing patterns.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Recipe">
+            <summary>
+            Gets or sets the recipe.
+            </summary>
+        </member>
+        <member name="P:Cake.Wyam.WyamSettings.Theme">
+            <summary>
+            Gets or sets the theme.
+            </summary>
+        </member>
+    </members>
+</doc>

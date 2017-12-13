@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReSharperReports</name>
+    </assembly>
+    <members>
+        <member name="T:ReSharperReports.Logger">
+            <summary>
+            A simple logging class for returning information to both command line and file
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Logger.WriteInfo">
+            <summary>
+            Gets or sets the action to be performed when writing information log messages
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Logger.WriteWarning">
+            <summary>
+            Gets or sets the action to be performed when writing warning log messages
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Logger.WriteError">
+            <summary>
+            Gets or sets the action to be performed when writing error log messages
+            </summary>
+        </member>
+        <member name="T:ReSharperReports.Options.MainOptions">
+            <summary>
+            The defined set of arguments which can be passed in from the command line
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Options.MainOptions.TransformVerb">
+            <summary>
+            The transform function
+            </summary>
+        </member>
+        <member name="T:ReSharperReports.Options.TransformSubOptions">
+            <summary>
+            The options for the Transform Verb
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Options.TransformSubOptions.InputFilePath">
+            <summary>
+            Gets or set the input file path
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Options.TransformSubOptions.OutputFilePath">
+            <summary>
+            Gets or set the output file path
+            </summary>
+        </member>
+        <member name="P:ReSharperReports.Options.TransformSubOptions.XslFilePath">
+            <summary>
+            Gets or set the XSL Transformation file path
+            </summary>
+            /// <remarks>This is an optional input</remarks>
+        </member>
+        <member name="P:ReSharperReports.Options.TransformSubOptions.LogFilePath">
+            <summary>
+            Gets or set the log file path
+            </summary>
+            <remarks>This is an optional input</remarks>
+        </member>
+        <member name="T:ReSharperReports.Program">
+            <summary>
+            The main entry point
+            </summary>
+        </member>
+        <member name="M:ReSharperReports.Program.Main(System.String[])">
+            <summary>
+            Entry point for the console application
+            </summary>
+            <param name="args">The passed in argumnets from command line</param>
+            <returns>An integer value, 0 is good, anything else, bad.</returns>
+        </member>
+    </members>
+</doc>

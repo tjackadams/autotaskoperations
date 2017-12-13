@@ -1,6 +1,7 @@
 ﻿namespace Autotask.Tests
 {
     using System.Xml.Linq;
+    using Operations;
     using Shouldly;
     using Xunit;
 

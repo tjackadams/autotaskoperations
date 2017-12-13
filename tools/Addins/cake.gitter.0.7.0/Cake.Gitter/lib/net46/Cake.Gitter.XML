@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Gitter</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Gitter.Chat.GitterChatApi">
+            <summary>
+            The actual worker for posting messages to Gitter
+            </summary>
+        </member>
+        <member name="M:Cake.Gitter.Chat.GitterChatApi.PostMessage(Cake.Core.ICakeContext,System.String,Cake.Gitter.Chat.GitterChatMessageSettings)">
+            <summary>
+            Sends a message to Gitter, based on the provided settings
+            </summary>
+            <param name="context">The Cake Context</param>
+            <param name="message">The message to be sent</param>
+            <param name="messageSettings">The settings to be used when sending the message</param>
+            <returns>An instance of <see cref="T:Cake.Gitter.Chat.GitterChatMessageResult"/> indicating success/failure</returns>
+        </member>
+        <member name="T:Cake.Gitter.Chat.GitterChatMessageResult">
+            <summary>
+            The result of GitterProvider Chat API post
+            </summary>
+        </member>
+        <member name="M:Cake.Gitter.Chat.GitterChatMessageResult.#ctor(System.Boolean,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Gitter.Chat.GitterChatMessageResult"/> class.
+            </summary>
+            <param name="ok">Indicating success or failure</param>
+            <param name="timeStamp">Timestamp of the message</param>
+            <param name="error">Error message on failure</param>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageResult.Ok">
+            <summary>
+            Gets a value indicating whether success or failure, <see cref="P:Cake.Gitter.Chat.GitterChatMessageResult.Error"/> for info on failure
+            </summary>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageResult.TimeStamp">
+            <summary>
+            Gets the Timestamp of the message
+            </summary>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageResult.Error">
+            <summary>
+            Gets the Error message on failure
+            </summary>
+        </member>
+        <member name="M:Cake.Gitter.Chat.GitterChatMessageResult.ToString">
+            <summary>
+            Convert this instance of value to a string representation
+            </summary>
+            <returns>The complete string representation of the GitterChatMessageResult</returns>
+        </member>
+        <member name="T:Cake.Gitter.Chat.GitterChatMessageSettings">
+            <summary>
+            Class that lets you override default API settings
+            </summary>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageSettings.Token">
+            <summary>
+            Gets or sets the Gitter token used for authentication.
+            </summary>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageSettings.RoomId">
+            <summary>
+            Gets or sets the Gitter Room Id.
+            </summary>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageSettings.IncomingWebHookUrl">
+            <summary>
+            Gets or sets the Gitter Incoming Web Hook Url
+            </summary>
+            <remarks>This can be used instead of token (https://developer.gitter.im/docs/rest-api)</remarks>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageSettings.MessageLevel">
+            <summary>
+            Gets or sets the Gitter Message Level
+            </summary>
+            <remarks>Default is Info</remarks>
+        </member>
+        <member name="P:Cake.Gitter.Chat.GitterChatMessageSettings.ThrowOnFail">
+            <summary>
+            Gets or sets the Optional flag for if should throw exception on failure
+            </summary>
+        </member>
+        <member name="T:Cake.Gitter.Chat.GitterChatProvider">
+            <summary>
+            Contains GitterProvider Chat functionality.
+            </summary>
+        </member>
+        <member name="M:Cake.Gitter.Chat.GitterChatProvider.#ctor(Cake.Core.ICakeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Gitter.Chat.GitterChatProvider"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:Cake.Gitter.Chat.GitterChatProvider.PostMessage(System.String,Cake.Gitter.Chat.GitterChatMessageSettings)">
+            <summary>
+            Post message to Gitter Room
+            </summary>
+            <param name="message">The message to send.</param>
+            <param name="messageSettings">Lets you override default settings like UserName, IconUrl or if it should ThrowOnFail</param>
+            <returns>Returns success/error/timestamp <see cref="T:Cake.Gitter.Chat.GitterChatMessageResult"/></returns>
+            <example>
+            <para>Post directly into a specified Gitter Room, using the RoomId and authorization Token.</para>
+            <para>Cake task:</para>
+            <code>
+            Gitter.Chat.PostMessage(message:"Hello from Cake.Gitter API, messageSettings:new GitterChatMessageSettings {
+                Token              = "123456",
+                RoomId             = "123456"
+            });
+            </code>
+            </example>
+            <example>
+            <para>Post to the Activity Feed within a Gitter Room using a custom Web Hook Url.</para>
+            <para>Cake task:</para>
+            <code>
+            Gitter.Chat.PostMessage(message:"Hello from Cake.Gitter Web Hook, messageSettings:new GitterChatMessageSettings {
+                IncomingWebHookUrl = "http://yourwebhookurl.net"
+            });
+            </code>
+            </example>
+            <example>
+            <para>Post to the Activity Feed within a Gitter Room using a custom Web Hook Url, specifying that there has been an error.</para>
+            <para>Cake task:</para>
+            <code>
+            Gitter.Chat.PostMessage(message:"Hello from Cake.Gitter Web Hook, messageSettings:new GitterChatMessageSettings {
+                IncomingWebHookUrl = "http://yourwebhookurl.net",
+                MessageLevel = GitterMessageLevel.Error
+            });
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Gitter.Chat.GitterMessageLevel">
+            <summary>
+            Provides known values for Gitter Message Level
+            </summary>
+        </member>
+        <member name="F:Cake.Gitter.Chat.GitterMessageLevel.Info">
+            <summary>
+            Information Message Level
+            </summary>
+        </member>
+        <member name="F:Cake.Gitter.Chat.GitterMessageLevel.Error">
+            <summary>
+            Error Message Level
+            </summary>
+        </member>
+        <member name="T:Cake.Gitter.Chat.NamespaceDoc">
+            <summary>
+            This namespace contain types for the Gitter Chat tool.
+            </summary>
+        </member>
+        <member name="T:Cake.Gitter.GitterAliases">
+            <summary>
+            <para>Contains aliases related to <see href="https://gitter.im">gitter.im</see>.</para>
+            <para>
+            In order to use the commands for this addin, you will need to include the following in your build.cake file to download and
+            reference from NuGet.org:
+            <code>
+            #addin Cake.Gitter
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="M:Cake.Gitter.GitterAliases.Gitter(Cake.Core.ICakeContext)">
+            <summary>
+            Gets a <see cref="T:Cake.Gitter.GitterProvider"/> instance that can be used for communicating with GitterProvider API.
+            </summary>
+            <param name="context">The context.</param>
+            <returns>A <see cref="T:Cake.Gitter.GitterProvider"/> instance.</returns>
+        </member>
+        <member name="T:Cake.Gitter.GitterProvider">
+            <summary>
+            Contains functionality related to Gitter API
+            </summary>
+        </member>
+        <member name="M:Cake.Gitter.GitterProvider.#ctor(Cake.Core.ICakeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Gitter.GitterProvider"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:Cake.Gitter.GitterProvider.Chat">
+            <summary>
+            Gets the Gitter Chat functionality.
+            </summary>
+        </member>
+        <member name="T:Cake.Gitter.NamespaceDoc">
+            <summary>
+            This namespace contains Gitter aliases.
+            </summary>
+        </member>
+    </members>
+</doc>

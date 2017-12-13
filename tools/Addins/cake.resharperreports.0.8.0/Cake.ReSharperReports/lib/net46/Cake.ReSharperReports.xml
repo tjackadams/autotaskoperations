@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.ReSharperReports</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.ReSharperReports.ReSharperReportsAliases">
+            <summary>
+            <para>Contains functionality related to the <see href="https://github.com/gep13/ReSharperReports">ReSharperReports</see> tool.</para>
+            <para>
+            In order to use the commands for this addin, you will need to include the following in your build.cake file to download and reference from NuGet.org:
+            <code>
+            #tool ReSharperReports
+            </code>
+            In addition, you will need to include the following:
+            <code>
+            #addin Cake.ReSharperReports
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="M:Cake.ReSharperReports.ReSharperReportsAliases.ReSharperReports(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.Core.IO.FilePath)">
+            <summary>
+            Runs ReSharperReports against the specified input FilePath, and outputs to specified output FilePath
+            </summary>
+            <param name="context">The context.</param>
+            <param name="inputFilePath">The input file path.</param>
+            <param name="outputFilePath">The output file path.</param>
+            <example>
+            <code>
+            ReSharperReports("C:/temp/dupfinder-output.xml", "c:/temp/dupfinder-output.html");
+            </code>
+            </example>
+            <example>
+            <code>
+            ReSharperReports("C:/temp/inspectcode-output.xml", "c:/temp/inspectcode-output.html");
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.ReSharperReports.ReSharperReportsAliases.ReSharperReports(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.Core.IO.FilePath,Cake.ReSharperReports.ReSharperReportsSettings)">
+            <summary>
+            Runs ReSharperReports against the specified input FilePath, and outputs to specified output FilePath with the specified ReSharperReportsSettings
+            </summary>
+            <param name="context">The context.</param>
+            <param name="inputFilePath">The input file path.</param>
+            <param name="outputFilePath">The output file path.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <code>
+            ReSharperReports("C:/temp/dupfinder-output.xml", "c:/temp/dupfinder-output-xsl.html", new ReSharperReportsSettings()
+            {
+                XslFilePath = "c:/temp/dupfinder.xsl"
+            });
+            </code>
+            </example>
+            <example>
+            <code>
+            ReSharperReports("C:/temp/inspectcode-output.xml", "c:/temp/inspectcode-output-xsl.html", new ReSharperReportsSettings()
+            {
+                XslFilePath = "c:/temp/inspectcode.xsl"
+            });
+            </code>
+            </example>
+            <example>
+            <code>
+            ReSharperReports("C:/temp/dupfinder-output.xml", "c:/temp/dupfinder-output-xsl.html", new ReSharperReportsSettings()
+            {
+                XslFilePath = "c:/temp/dupfinder.xsl",
+                LogFilePath = "c:/temp/resharperreports-dupfinder.log"
+            });
+            </code>
+            </example>
+            <example>
+            <code>
+            ReSharperReports("C:/temp/inspectcode-output.xml", "c:/temp/inspectcode-output-xsl.html", new ReSharperReportsSettings()
+            {
+                XslFilePath = "c:/temp/inspectcode.xsl",
+                LogFilePath = "c:/temp/resharperreports-inspectcode.log"
+            });
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.ReSharperReports.ReSharperReportsRunner">
+            <summary>
+            The ReSharperReports runner.
+            </summary>
+        </member>
+        <member name="M:Cake.ReSharperReports.ReSharperReportsRunner.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.ReSharperReports.ReSharperReportsRunner" /> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="toolLocator">The tool locator</param>
+        </member>
+        <member name="M:Cake.ReSharperReports.ReSharperReportsRunner.Run(Cake.Core.IO.FilePath,Cake.Core.IO.FilePath,Cake.ReSharperReports.ReSharperReportsSettings)">
+            <summary>
+            Transform the input XML file using either default XSL file, or one passed in via Settings.
+            </summary>
+            <param name="inputFilePath">The input filepath.</param>
+            <param name="outputFilePath">The output file path.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Cake.ReSharperReports.ReSharperReportsRunner.GetToolName">
+            <summary>
+            Gets the name of the tool.
+            </summary>
+            <returns>The name of the tool.</returns>
+        </member>
+        <member name="M:Cake.ReSharperReports.ReSharperReportsRunner.GetToolExecutableNames">
+            <summary>
+            Gets the name of the tool executable.
+            </summary>
+            <returns>The tool executable name.</returns>
+        </member>
+        <member name="T:Cake.ReSharperReports.ReSharperReportsSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.ReSharperReports.ReSharperReportsRunner"/>.
+            </summary>
+        </member>
+        <member name="P:Cake.ReSharperReports.ReSharperReportsSettings.XslFilePath">
+            <summary>
+            Gets or sets the XSL Transform File path.
+            </summary>
+            <value>The XSL Transform File path.</value>
+        </member>
+        <member name="P:Cake.ReSharperReports.ReSharperReportsSettings.LogFilePath">
+            <summary>
+            Gets or sets the log file path.
+            </summary>
+            <value>The log file path.</value>
+        </member>
+    </members>
+</doc>

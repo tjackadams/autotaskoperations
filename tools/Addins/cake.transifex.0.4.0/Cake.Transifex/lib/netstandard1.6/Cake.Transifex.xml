@@ -1,0 +1,554 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Transifex</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Transifex.ITransifexRunnerCommands">
+            <summary>
+            Defines the commands supported by the transifex client and the transifex runner.
+            </summary>
+        </member>
+        <member name="M:Cake.Transifex.ITransifexRunnerCommands.Init(Cake.Transifex.TransifexInitSettings)">
+            <summary>
+            Initializes a transifex configuration file and the user configuration file (if token, username or password is specified).
+            </summary>
+            <remarks>
+            <note type="warning">
+              Do not call this runner if a configuration file already exists in the repository.
+              You will be asked to overwrite the file, which should not be done in cases where
+              the file have already been configured.
+            </note>
+            </remarks>
+        </member>
+        <member name="M:Cake.Transifex.ITransifexRunnerCommands.Pull(Cake.Transifex.TransifexPullSettings)">
+            <summary>
+            Pull files from remote server to local repository.
+            </summary>
+            <param name="settings">The settings to use when pulling resources from the server.</param>
+            <returns>The current instance of <see cref="T:Cake.Transifex.ITransifexRunnerCommands"/>.</returns>
+        </member>
+        <member name="M:Cake.Transifex.ITransifexRunnerCommands.Push(Cake.Transifex.TransifexPushSettings)">
+            <summary>
+            Push local files to remote server.
+            </summary>
+            <param name="settings">The settings to use when pushing resources to the server.</param>
+            <returns>The current instance of <see cref="T:Cake.Transifex.ITransifexRunnerCommands"/>.</returns>
+        </member>
+        <member name="M:Cake.Transifex.ITransifexRunnerCommands.Status(System.String)">
+            <summary>
+            Print status of current project.
+            </summary>
+            <param name="resources">The resources to check the status for (defaults to all).</param>
+            <returns>The current instance of <see cref="T:Cake.Transifex.ITransifexRunnerCommands"/>.</returns>
+        </member>
+        <member name="T:Cake.Transifex.TransifexInitSettings">
+            <summary>
+            Defines the properties that can be used when calling the init command on the transifex
+            client. This class cannot be inherited.
+            </summary>
+            <seealso cref="T:Cake.Transifex.TransifexRunnerSettings"/>
+            <category>Initialization</category>
+        </member>
+        <member name="M:Cake.Transifex.TransifexInitSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexInitSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Transifex.TransifexInitSettings.Host">
+            <summary>
+            Gets or sets the default host of the transifex client.
+            </summary>
+            <remarks>
+            Defaults to <c>www.transifex.com</c> to keep the user from
+            being prompted to specify a host when called.
+            </remarks>
+        </member>
+        <member name="P:Cake.Transifex.TransifexInitSettings.Password">
+            <summary>
+            Gets or sets the password for the user when connecting to transifex.
+            </summary>
+            <remarks>
+            Can not be used together with the <see cref="P:Cake.Transifex.TransifexInitSettings.Token" /> parameter.
+            </remarks>
+            <seealso cref="P:Cake.Transifex.TransifexInitSettings.Username" />
+            <seealso cref="P:Cake.Transifex.TransifexInitSettings.Token" />
+        </member>
+        <member name="P:Cake.Transifex.TransifexInitSettings.Token">
+            <summary>
+            Gets or sets the token to use when connecting to transifex.
+            </summary>>
+            <remarks>
+            Can not be used at the same time as setting the <see cref="P:Cake.Transifex.TransifexInitSettings.Username" /> or <see cref="P:Cake.Transifex.TransifexInitSettings.Password" /> parameter.
+            </remarks>
+            <seealso cref="P:Cake.Transifex.TransifexInitSettings.Username" />
+            <seealso cref="P:Cake.Transifex.TransifexInitSettings.Password" />
+        </member>
+        <member name="P:Cake.Transifex.TransifexInitSettings.Username">
+            <summary>
+            Gets or sets the username for the user when connecting to transifex.
+            </summary>
+            <remarks>
+            Can not be used at the same time as setting the <see cref="P:Cake.Transifex.TransifexInitSettings.Token" /> parameter.
+            </remarks>
+            <seealso cref="P:Cake.Transifex.TransifexInitSettings.Password" />
+            <seealso cref="P:Cake.Transifex.TransifexInitSettings.Token" />
+        </member>
+        <member name="M:Cake.Transifex.TransifexInitSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <inheritdoc />
+            <exception cref="T:System.ArgumentException">
+            Thrown when both the <see cref="P:Cake.Transifex.TransifexInitSettings.Token" /> property and either
+            the <see cref="P:Cake.Transifex.TransifexInitSettings.Username" /> or <see cref="P:Cake.Transifex.TransifexInitSettings.Password" /> properties have been
+            specified.
+            </exception>
+        </member>
+        <member name="T:Cake.Transifex.TransifexMode">
+            <summary>
+            Specifies the mode of the translation file to pull
+            </summary>
+        </member>
+        <member name="F:Cake.Transifex.TransifexMode.Reviewed">
+            <summary>
+            Only pull down reviewed translations.
+            </summary>
+            <remarks>
+            All translations that have not been reviewed will either be empty, or be in the source
+            language (depending on the file format used)
+            </remarks>
+        </member>
+        <member name="F:Cake.Transifex.TransifexMode.Developer">
+            <summary>
+            Pull down all translations, whether they have been translated or not.
+            </summary>
+            <remarks>These are files suitable for usage by developers in their source code tree.</remarks>
+        </member>
+        <member name="F:Cake.Transifex.TransifexMode.Translator">
+            <summary>
+            Pull down all completed translations, whether they have been reviewed or not.
+            </summary>
+            <remarks>These are files suitable for offline translation of the resource(s).</remarks>
+        </member>
+        <member name="F:Cake.Transifex.TransifexMode.OnlyTranslated">
+            <summary>
+            Pull down only strings that have been translated.
+            </summary>
+        </member>
+        <member name="F:Cake.Transifex.TransifexMode.OnlyReviewed">
+            <summary>
+            Pull down only strings that have been translated and reviewed.
+            </summary>
+        </member>
+        <member name="F:Cake.Transifex.TransifexMode.SourceAsTranslation">
+            <summary>
+            Pull down both translated and untranslated strings (untranslated strings will be set to
+            the value of the source).
+            </summary>
+        </member>
+        <member name="T:Cake.Transifex.TransifexPullSettings">
+            <summary>
+            Defines the properties that can be used when calling the pull command on the transifex
+            client. This class cannot be inherited.
+            </summary>
+            <seealso cref="T:Cake.Transifex.TransifexRunnerRemoteSettings`1"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexPullSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexPullSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPullSettings.All">
+            <summary>
+            Gets or sets a value indicating whether to pull down all languages (even new ones).
+            </summary>
+            <value><see langword="true"/> if to pull down all languages all; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPullSettings.DisableOverwrite">
+            <summary>
+            Gets or sets a value indicating whether to disable overwrite of existing files.
+            </summary>
+            <value><see langword="true"/> if to disable overwrite; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPullSettings.DownloadSourceFiles">
+            <summary>
+            Gets or sets a value indicating whether to force downloading of the source file.
+            </summary>
+            <value><see langword="true"/> to download the source file; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPullSettings.MinimumPercentage">
+            <summary>
+            Gets or sets the minimum acceptable percentage of a translation in order to download it.
+            </summary>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPullSettings.Mode">
+            <summary>
+            Gets or sets the mode of the translation file to pull.
+            </summary>
+            <value>The mode.</value>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPullSettings.Pseudo">
+            <summary>
+            Gets or sets a value indicating whether to download the pseudo file.
+            </summary>
+            <value><see langword="true"/> to download the pseudo file; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="M:Cake.Transifex.TransifexPullSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the arguments and appends the necessary arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Cake.Transifex.TransifexPushSettings">
+            <summary>
+            Defines the properties that can be used when calling the push command on the transifex
+            client. This class cannot be inherited.
+            </summary>
+            <seealso cref="T:Cake.Transifex.TransifexRunnerRemoteSettings`1"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexPushSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexPushSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPushSettings.NoInteractive">
+            <summary>
+            Gets or sets a value indicating whether to require user input when forcing a push.
+            </summary>
+            <value><see langword="true"/> to don't require user input; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPushSettings.UploadSourceFiles">
+            <summary>
+            Gets or sets a value indicating whether to push the source file to the remote server.
+            </summary>
+            <value><see langword="true"/> to push the source file; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="P:Cake.Transifex.TransifexPushSettings.UploadTranslations">
+            <summary>
+            Gets or sets a value indicating whether to push all local translations to the remote server.
+            </summary>
+            <value><see langword="true"/> to push all local translations; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="M:Cake.Transifex.TransifexPushSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the arguments and appends the necessary arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Cake.Transifex.TransifexRunner">
+            <summary>
+            The wrapper around the transifex client. This class cannot be inherited.
+            </summary>
+            <seealso cref="T:Cake.Core.Tooling.Tool`1"/>
+            <seealso cref="T:Cake.Transifex.ITransifexRunnerCommands"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunner.#ctor(Cake.Core.IO.IFileSystem,Cake.Core.ICakeEnvironment,Cake.Core.IO.IProcessRunner,Cake.Core.Tooling.IToolLocator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexRunner"/> class.
+            </summary>
+            <param name="fileSystem">The file system.</param>
+            <param name="environment">The environment.</param>
+            <param name="processRunner">The process runner.</param>
+            <param name="tools">The tool locator.</param>
+        </member>
+        <member name="T:Cake.Transifex.TransifexRunnerAliases">
+            <summary>
+            Provides a wrapper around transifex client functionality within a Cake build script.
+            </summary>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexInit(Cake.Core.ICakeContext)">
+            <summary>
+            This command initializes the current repository with a default configuration file, and
+            sets the host to <c>www.transifex.com</c>.
+            </summary>
+            <param name="context">The cake context</param>
+            <para>Runs <c>tx init --host www.transifex.com</c> with the specified with default settings.</para>
+            <para>Cake task:</para>
+            <example>
+            <code>
+            <![CDATA[
+            Task("Transifex-Init")
+                .Does(() =>
+            {
+                TransifexInit();
+            };
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexInit(Cake.Core.ICakeContext,Cake.Transifex.TransifexInitSettings)">
+            <summary>
+            This command initializes the current repository with a default configuration file, and
+            optionally the user configuration file with either a Username + Password combination or
+            an API token.
+            </summary>
+            <param name="context">The cake context</param>
+            <param name="settings">The settings to use when initializing repository.</param>
+            <para>Runs <c>tx init</c> with the specified <paramref name="settings" /></para>
+            <para>Cake task:</para>
+            <example>
+            <code title="Initialize with a username and password">
+            <![CDATA[
+            Task("Transifex-Init")
+                .Does(() =>
+            {
+                var settings = new TransifexInitSettings
+                {
+                    Username = "MY-AWESOME-USERNAME",
+                    Password = "MY-SUPER-SECRET-PASSWORD"
+                };
+                TransifexInit(settings);
+            };
+            ]]>
+            </code>
+            <code title="Initialize with an API token">
+            <![CDATA[
+            Task("Transifex-Init")
+                .Does(() =>
+            {
+                var settings = new TransifexInitSettings
+                {
+                    Token = "API-TOKEN-HERE"
+                };
+                TransifexInit(settings);
+            };
+            ]]>
+            </code>
+            </example>
+            <exception cref="T:System.ArgumentException">
+            Thrown when both the <see cref="P:Cake.Transifex.TransifexInitSettings.Token" /> property and either
+            the <see cref="P:Cake.Transifex.TransifexInitSettings.Username" /> or <see cref="P:Cake.Transifex.TransifexInitSettings.Password" /> properties have been
+            specified in the <paramref name="settings" /> parameter.
+            </exception>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexPull(Cake.Core.ICakeContext)">
+            <summary>
+            This command pulls all outstanding changes from the remote Transifex server to the local
+            repository. By default only the files that are watched by transifex will be updated.
+            </summary>
+            <param name="context">The context.</param>
+            <para>Run 'tx pull'</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Transifex-Pull")
+                .Does(() =>
+            {
+                TransifexPull();
+            };
+            ]]>
+            </code>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexPull(Cake.Core.ICakeContext,Cake.Transifex.TransifexPullSettings)">
+            <summary>
+            This command pulls all outstanding changes from the remote Transifex server to the local
+            repository. By default, only the files that are watched by Transifex will be updated but
+            if you want to fetch the translations for new languages as well, set the <see
+            cref="P:Cake.Transifex.TransifexPullSettings.All"/> property to <c>true</c> in the <paramref name="settings"/>.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <para>Run 'tx pull' with additional options</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Transifex-Pull")
+                .Does(() =>
+            {
+                var settings = new TransifexPullSettings
+                {
+                    All = true,
+                    MinimumPercentage = 75,
+                    Mode = TransifexMode.Reviewed
+                };
+                TransifexPull(settings);
+            };
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexPush(Cake.Core.ICakeContext)">
+            <summary>
+            This command pushes all local files that have been added to Transifex to the remote
+            server. All new translations are merged with existing ones and if a language doesn't
+            exist then it is created.
+            </summary>
+            <param name="context">The context.</param>
+            <example>
+            <para>Run 'tx push'</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Transifex-Push")
+                .Does(() =>
+            {
+                TransifexPush();
+            };
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexPush(Cake.Core.ICakeContext,Cake.Transifex.TransifexPushSettings)">
+            <summary>
+            This command pushes all local files that have been added to Transifex to the remote
+            server. All new translations are merged with existing ones and if a language doesn't
+            exist then it gets created. If you want to push the source file as well (either because
+            this is your first time running the client or because you have updated with new entries),
+            set the <see cref="P:Cake.Transifex.TransifexPushSettings.UploadSourceFiles"/> to <c>true</c>. By default,
+            this command will push all files which are watched by Transifex but you can filter this
+            per resource or/and language.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="settings">The settings.</param>
+            <example>
+            <para>Run 'tx push' with additional arguments</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Transifex-Push")
+                .Does(() =>
+            {
+                TransifexPush(options =>
+                {
+                    options.UploadSourceFiles = true;
+                    options.UploadTranslations = true;
+                });
+            };
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexStatus(Cake.Core.ICakeContext)">
+            <summary>
+            Prints the status of the current project by reading the data in the configuration file.
+            </summary>
+            <param name="context">The context.</param>
+            <example>
+            <para>Run 'tx status'</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Transifex-Status")
+                .Does(() =>
+            {
+                TransifexStatus();
+            };
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerAliases.TransifexStatus(Cake.Core.ICakeContext,System.String)">
+            <summary>
+            Prints the status of the current project by reading the data in the configuration file,
+            but only for the specified <paramref name="resources"/>.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="resources">The resources.</param>
+            <example>
+            <para>Run 'tx status "--resources=resource.name"'</para>
+            <para>Cake task:</para>
+            <code>
+            <![CDATA[
+            Task("Transifex-Status")
+                .Does(() =>
+            {
+                TransifexStatus("cake.transifexresx");
+            };
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="T:Cake.Transifex.TransifexRunnerRemoteSettings`1">
+            <summary>
+            Defines common properties that can be used for all commands touching a remote location.
+            </summary>
+            <seealso cref="T:Cake.Transifex.TransifexRunnerSettings`1"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerRemoteSettings`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see
+            cref="T:Cake.Transifex.TransifexRunnerRemoteSettings`1"/> class.
+            </summary>
+            <param name="command">The command to execute.</param>
+        </member>
+        <member name="P:Cake.Transifex.TransifexRunnerRemoteSettings`1.Force">
+            <summary>
+            Gets or sets a value indicating whether to force the command event if the resource exists.
+            </summary>
+        </member>
+        <member name="P:Cake.Transifex.TransifexRunnerRemoteSettings`1.Languages">
+            <summary>
+            The languages you want to push/pull. (defaults to all)
+            </summary>
+            <remarks>Supports unix style wildcards.</remarks>
+        </member>
+        <member name="P:Cake.Transifex.TransifexRunnerRemoteSettings`1.SkipErrors">
+            <summary>
+            Gets or sets a value indicating whether to continue with the command even if an error ocurs.
+            </summary>
+        </member>
+        <member name="P:Cake.Transifex.TransifexRunnerRemoteSettings`1.UseXliff">
+            <summary>
+            Gets or sets a value indicating whether use the xliff format.
+            </summary>
+        </member>
+        <member name="T:Cake.Transifex.TransifexRunnerSettings`1">
+            <summary>
+            Defines common properties that can be used for all commands.
+            </summary>
+            <seealso cref="T:Cake.Transifex.TransifexRunnerSettings"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerSettings`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexRunnerSettings"/> class.
+            </summary>
+            <param name="command">The command to execute.</param>
+        </member>
+        <member name="P:Cake.Transifex.TransifexRunnerSettings`1.Resources">
+            <summary>
+            The resources you want to use for this command (defaults to all)
+            </summary>
+            <remarks>Supports unix style wildcards</remarks>
+        </member>
+        <member name="T:Cake.Transifex.TransifexRunnerSettings">
+            <summary>
+            Defines common properties that can be used for all commands.
+            </summary>
+            <seealso cref="T:Cake.Core.Tooling.ToolSettings"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerSettings.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexRunnerSettings"/> class.
+            </summary>
+            <param name="command">The command to execute.</param>
+        </member>
+        <member name="P:Cake.Transifex.TransifexRunnerSettings.Command">
+            <summary>
+            The transifex command to execute.
+            </summary>
+        </member>
+        <member name="M:Cake.Transifex.TransifexRunnerSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the arguments and appends the necessary arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:Cake.Transifex.TransifexStatusSettings">
+            <summary>
+            Defines the properties that can be used when calling the status command on the transifex
+            client. This class cannot be inherited
+            </summary>
+            <seealso cref="T:Cake.Transifex.TransifexRunnerSettings`1"/>
+        </member>
+        <member name="M:Cake.Transifex.TransifexStatusSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Transifex.TransifexStatusSettings"/> class.
+            </summary>
+        </member>
+        <member name="M:Cake.Transifex.TransifexStatusSettings.EvaluateCore(Cake.Core.IO.ProcessArgumentBuilder)">
+            <summary>
+            Evaluates the arguments and appends the necessary arguments.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+    </members>
+</doc>

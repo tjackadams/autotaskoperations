@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.MicrosoftTeams</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.MicrosoftTeams.MicrosoftTeamsAliases">
+            <summary>
+            Contains functionality related to Microsoft Teams.
+            </summary>
+        </member>
+        <member name="M:Cake.MicrosoftTeams.MicrosoftTeamsAliases.MicrosoftTeamsPostMessage(Cake.Core.ICakeContext,System.String,Cake.MicrosoftTeams.MicrosoftTeamsSettings)">
+            <summary>
+            Posts a message to a Microsoft Teams channel
+            </summary>
+            <param name="context">The context.</param>
+            <param name="message">The message.</param>
+            <param name="settings">The settings.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <returns>
+            <list type="table">
+            <listheaders>
+            <term>Response Code</term>
+            <term>Description</term>
+            <term>Details</term>
+            </listheaders>
+            <item><term>200</term><term>Ok</term><term>A well-formed request is sent to an existing webhook. The request contains a valid payload, and has a valid corresponding webhook configuration.</term></item>
+            <item><term>400</term><term>Bad Request</term><term>An incorrectly-formed request is sent to a webhook that exists. The payload could contain non-parseable JSON, incorrect JSON values (e.g.expected a String, got an array), incorrect content-type, etc..</term></item>
+            <item><term>404</term><term>Not Found</term><term>A request is sent to a webhook that does not exist.</term></item>
+            <item><term>413</term><term>Payload Too Large</term><term>A request is sent to a webhook that is too large in size for processing.</term></item>
+            <item><term>429</term><term>Too Many Requests</term><term>Client is sending too many requests and Office 365 is throttling the requests to a webhook.</term></item>
+            </list>
+            </returns>
+            <example>
+            <code>
+            MicrosoftTeamsPostMessage("Hello from Cake!",
+               new MicrosoftTeamsSettings {
+                   IncomingWebhookUrl = EnvironmentVariable("MicrosoftTeamsWebHook")
+               });
+            </code>
+            </example>
+        </member>
+        <member name="M:Cake.MicrosoftTeams.MicrosoftTeamsAliases.MicrosoftTeamsPostMessage(Cake.Core.ICakeContext,Cake.MicrosoftTeams.MicrosoftTeamsMessageCard,Cake.MicrosoftTeams.MicrosoftTeamsSettings)">
+             <summary>
+             Posts a message to a Microsoft Teams channel
+             </summary>
+             <param name="context">The context.</param>
+             <param name="message">The message as <see cref="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard"/>.</param>
+             <param name="settings">The settings.</param>
+             <exception cref="T:System.ArgumentNullException"></exception>
+             <returns>
+             <list type="table">
+             <listheaders>
+             <term>Response Code</term>
+             <term>Description</term>
+             <term>Details</term>
+             </listheaders>
+             <item><term>200</term><term>Ok</term><term>A well-formed request is sent to an existing webhook. The request contains a valid payload, and has a valid corresponding webhook configuration.</term></item>
+             <item><term>400</term><term>Bad Request</term><term>An incorrectly-formed request is sent to a webhook that exists. The payload could contain non-parseable JSON, incorrect JSON values (e.g.expected a String, got an array), incorrect content-type, etc..</term></item>
+             <item><term>404</term><term>Not Found</term><term>A request is sent to a webhook that does not exist.</term></item>
+             <item><term>413</term><term>Payload Too Large</term><term>A request is sent to a webhook that is too large in size for processing.</term></item>
+             <item><term>429</term><term>Too Many Requests</term><term>Client is sending too many requests and Office 365 is throttling the requests to a webhook.</term></item>
+             </list>
+             </returns>
+             <example>
+             <code>
+             var messageCard = new MicrosoftTeamsMessageCard {
+                summary = "Cake posted message using Cake.MicrosoftTeams",
+                title ="Cake Microsoft Teams",
+                sections = new []{
+                    new MicrosoftTeamsMessageSection{
+                        activityTitle = "Cake posted message",
+                        activitySubtitle = "using Cake.MicrosoftTeams",
+                        activityText = "Here is the runtime Information",
+                        activityImage = "https://raw.githubusercontent.com/cake-build/graphics/master/png/cake-small.png",
+                        facts = new [] {
+                            new MicrosoftTeamsMessageFacts { name ="CakeVersion", value = Context.Environment.Runtime.CakeVersion.ToString() },
+                            new MicrosoftTeamsMessageFacts { name ="TargetFramework", value = Context.Environment.Runtime.TargetFramework.ToString() },
+                            new MicrosoftTeamsMessageFacts { name ="IsCoreClr", value = Context.Environment.Runtime.IsCoreClr.ToString() }
+                        },
+                    }
+                },
+                potentialAction = new [] { 
+                    new MicrosoftTeamsMessagePotentialAction {
+                        name = "View in Trello",
+                        target = new []{"https://trello.com/c/1101/"}
+                    }
+                }
+             };
+            
+             MicrosoftTeamsPostMessage(messageCard,
+                new MicrosoftTeamsSettings {
+                    IncomingWebhookUrl = EnvironmentVariable("MicrosoftTeamsWebHook")
+                });
+             </code>
+             </example>
+        </member>
+        <member name="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard">
+            <summary>
+            Message structure used by <see cref="T:Cake.MicrosoftTeams.MicrosoftTeamsAliases"/>.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.summary">
+            <summary>
+            A string used for summarizing card content. This will be shown as the message subject. This is required if the text parameter isn't populated.
+            </summary>
+            <remarks>Plaintext String with no added Markdown.</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.themeColor">
+            <summary>
+            Specifies a custom brand color for the card. The color will be displayed in a non-obtrusive manner.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.text">
+            <summary>
+            The main text of the card. This will be rendered below the sender information and optional title, and above any sections or actions present.
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.title">
+            <summary>
+            A title for the Connector message. Shown at the top of the message.
+            </summary>
+            <remarks>Plaintext String with no added Markdown.</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.sections">
+            <summary>
+            Contains a list of sections to display in the card.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.potentialAction">
+            <summary>
+            Contains a list of actions to display in the card.
+            </summary>
+        </member>
+        <member name="M:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard.ToString">
+            <summary>
+            Converts <see cref="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard"/> to an string representation.
+            </summary>
+            <returns>Returns string representation of current <see cref="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageCard"/>.</returns>
+        </member>
+        <member name="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageFacts">
+            <summary>
+            Facts are simple name value pairs that will appear in a list. These are set as a list in the facts field of the <see cref="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection"/> object.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageFacts.name">
+            <summary>
+            Name of the fact.
+            </summary>
+            <remarks>Plaintext String with no added Markdown.</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageFacts.value">
+            <summary>
+            Value of the fact.
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="T:Cake.MicrosoftTeams.MicrosoftTeamsMessagePotentialAction">
+            <summary>
+            Actions can be presented to the user by including a Schema.org JSON-LD object in the potentialAction array. 
+            We currently support schema.org/ViewAction, which creates a hyperlinked action button at the bottom of the connector card. 
+            The text shown on the action button is set by the Action's name parameter, and the destination of the hyperlink is the first link in the target array.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessagePotentialAction.context">
+            <summary>
+            Actions can be presented to the user by including a Schema.org JSON-LD object.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessagePotentialAction.type">
+            <summary>
+            Currently only supports ViewAction, which creates a hyperlinked action button at the bottom of the connector card. 
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessagePotentialAction.name">
+            <summary>
+            Name of the action. (Shown as the Button text)
+            </summary>
+            <remarks>Plaintext String with no added Markdown.</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessagePotentialAction.target">
+            <summary>
+            Target of the action. (The destination hyperlink)
+            </summary>
+            <remarks>Plaintext string containing a URL</remarks>
+        </member>
+        <member name="T:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection">
+            <summary>
+            A section is a canvas to show richer content than what can be represented in the just the title and text of the card. 
+            A section can contain text and images, or the activity and facts fields can be used to highlight key events and details.
+            These sections are passed via the sections array in the payload, and will be rendered in the order of array position.
+            The content in a section is displayed in the following order(top to bottom): 
+                * title
+                * text
+                * activityTitle, activitySubtitle, activityText
+                * facts
+                * images
+                * actions
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.title">
+            <summary>
+            Title of the section.
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.activityTitle">
+            <summary>
+            Title of the event or action. Often this will be the name of the "actor".
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.activitySubtitle">
+            <summary>
+            A subtitle describing the event or action. Often this will be a summary of the action.
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.activityImage">
+            <summary>
+            An image representing the action. Often this is an avatar of the "actor" of the activity.
+            </summary>
+            <remarks>URL to image.</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.activityText">
+            <summary>
+            A full description of the action.
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.facts">
+            <summary>
+            A collection of facts, displayed as key-value pairs.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.text">
+            <summary>
+            Optional text that will appear before the activity.
+            </summary>
+            <remarks>Content can be formatted using basic Markdown markup (headings, bold, italic, links, etc.).</remarks>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsMessageSection.markdown">
+            <summary>
+            Set this to false to disable markdown parsing on this section's content. Markdown parsing is enabled by default.
+            </summary>
+        </member>
+        <member name="T:Cake.MicrosoftTeams.MicrosoftTeamsSettings">
+            <summary>
+            Contains settings used by <see cref="T:Cake.MicrosoftTeams.MicrosoftTeamsAliases"/>.
+            </summary>
+        </member>
+        <member name="P:Cake.MicrosoftTeams.MicrosoftTeamsSettings.IncomingWebhookUrl">
+            <summary>
+            Gets or sets the incoming webhook url.
+            </summary>
+            <value>The incoming webhook url.</value>
+        </member>
+        <member name="T:Cake.MicrosoftTeams.NamespaceDoc">
+            <summary>
+            This namespace contains Microsoft Teams aliases.
+            </summary>
+        </member>
+    </members>
+</doc>

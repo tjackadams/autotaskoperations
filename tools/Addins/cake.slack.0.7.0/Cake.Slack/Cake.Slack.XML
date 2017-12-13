@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Slack</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Slack.Chat.SlackChatMessageAttachment">
+            <summary>
+            Class to allow for message attachments
+            </summary>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatMessageAttachment.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Slack.Chat.SlackChatMessageAttachment"/> class.
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Fallback">
+            <summary>
+            Required Text summary of the attachment that is shown by clients that understand attachments but choose not to show them.
+            </summary>
+            <value>
+            The fallback.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Text">
+            <summary>
+            Optional Text that should appear within the attachment
+            </summary>
+            <value>
+            The Text.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Pretext">
+            <summary>
+            Optional Text that should appear above the formatted data
+            </summary>
+            <value>
+            The Pretext.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Color">
+            <summary>
+            Color displayed with the attachment
+            </summary>
+            <value>
+            The Color.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Title">
+            <summary>
+            The message title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Title_Link">
+            <summary>
+            The message title link.
+            </summary>
+            <value>
+            The title link.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Author_Name">
+            <summary>
+            The message author's name.
+            </summary>
+            <value>
+            The author_name.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Author_Link">
+            <summary>
+            Link to the message author
+            </summary>
+            <value>
+            The author_link.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Author_Icon">
+            <summary>
+            The message author's icon url
+            </summary>
+            <value>
+            The author_icon.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Image_Url">
+            <summary>
+            Url to an image to display in message.
+            </summary>
+            <value>
+            The image_url.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Thumb_Url">
+            <summary>
+            Url to thumbprint to display in message.
+            </summary>
+            <value>
+            The thumb_url.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Fields">
+            <summary>
+            Collection of <see cref="T:Cake.Slack.Chat.SlackChatMessageAttachmentField"/>
+            </summary>
+            <value>
+            The fields.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachment.Mrkdwn_In">
+            <summary>
+            Collection of fields that use Slack's Markdown-like message formatting. Valid values are "pretext", "text", and "fields".
+            </summary>
+            <value>
+            Which fields use Slack's Markdown-like message formatting.
+            </value>
+        </member>
+        <member name="T:Cake.Slack.Chat.SlackChatMessageAttachmentField">
+            <summary>
+            Field for message attachment
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachmentField.Title">
+            <summary>
+            Required Field Title
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachmentField.Value">
+            <summary>
+            Text value of the field. May contain standard message markup and must be escaped as normal
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageAttachmentField.Short">
+            <summary>
+            Optional flag indicating whether the `value` is short enough to be displayed side-by-side with other values
+            </summary>
+            <value>
+              <c>true</c> if short; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Cake.Slack.Chat.SlackChatProvider">
+            <summary>
+            Contains <see href="https://api.slack.com/">Slack API</see> Chat functionality.
+            </summary>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatProvider.PostMessage(System.String,System.String,System.String)">
+            <summary>
+            Post message to Slack Channel
+            </summary>
+            <param name="token">SlackProvider auth token</param>
+            <param name="channel">Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.</param>
+            <param name="text">Text of the message to send. For message formatting see <see href="https://api.slack.com/docs/formatting">Formatting | Slack</see></param>
+            <returns>Returns success/error/timestamp <see cref="T:Cake.Slack.Chat.SlackChatMessageResult"/></returns>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatProvider.PostMessage(System.String,System.String,Cake.Slack.Chat.SlackChatMessageSettings)">
+            <summary>
+            Post message to Slack Channel
+            </summary>
+            <param name="channel">Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.</param>
+            <param name="text">Text of the message to send. For message formatting see <see href="https://api.slack.com/docs/formatting">Formatting | Slack</see></param>
+            <returns>Returns success/error/timestamp <see cref="T:Cake.Slack.Chat.SlackChatMessageResult"/></returns>
+            <param name="messageSettings">Lets you override default settings like UserName, IconUrl or if it should ThrowOnFail</param>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatProvider.PostMessage(System.String,System.String,System.String,System.Collections.Generic.ICollection{Cake.Slack.Chat.SlackChatMessageAttachment})">
+            <summary>
+            Post message to Slack Channel
+            </summary>
+            <param name="token">SlackProvider auth token</param>
+            <param name="channel">Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.</param>
+            <param name="text">Text of the message to send. For message formatting see <see href="https://api.slack.com/docs/formatting">Formatting | Slack</see></param>
+            <param name="messageAttachments">Lets you send a message attachment see <see href="https://api.slack.com/docs/attachments">Attachments | Slack</see></param>
+            <returns>Returns success/error/timestamp <see cref="T:Cake.Slack.Chat.SlackChatMessageResult"/></returns>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatProvider.PostMessage(System.String,System.String,System.Collections.Generic.ICollection{Cake.Slack.Chat.SlackChatMessageAttachment},Cake.Slack.Chat.SlackChatMessageSettings)">
+            <summary>
+            Post message to Slack Channel
+            </summary>
+            <param name="channel">Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.</param>
+            <param name="text">Text of the message to send. For message formatting see <see href="https://api.slack.com/docs/formatting">Formatting | Slack</see></param>
+            <param name="messageAttachments">Lets you send a message attachment see <see href="https://api.slack.com/docs/attachments">Attachments | Slack</see></param>
+            <param name="messageSettings">Lets you override default settings like UserName, IconUrl or if it should ThrowOnFail</param>
+            <returns>
+            Returns success/error/timestamp <see cref="T:Cake.Slack.Chat.SlackChatMessageResult" />
+            </returns>
+            <exception cref="T:System.ArgumentNullException">messageSettings</exception>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatProvider.#ctor(Cake.Core.ICakeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Slack.Chat.SlackChatProvider"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Cake.Slack.Chat.SlackChatMessageSettings">
+            <summary>
+            Class that lets you override default API settings
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageSettings.Token">
+            <summary>
+            Slack token used for authentication.
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageSettings.IncomingWebHookUrl">
+            <summary>
+            This can be used instead of token (https://api.slack.com/incoming-webhooks)
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageSettings.UserName">
+            <summary>
+            Name of bot.
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageSettings.IconUrl">
+            <summary>
+            URL to an image to use as the icon for this message
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageSettings.ThrowOnFail">
+            <summary>
+            Optional flag for if should throw exception on failure
+            </summary>
+        </member>
+        <member name="T:Cake.Slack.Chat.SlackChatMessageResult">
+            <summary>
+            The result of SlackProvider Chat API post
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageResult.Ok">
+            <summary>
+            Indicating success or failure, <see cref="P:Cake.Slack.Chat.SlackChatMessageResult.Error"/> for info on failure 
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageResult.Channel">
+            <summary>
+            Encoded channel ID
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageResult.TimeStamp">
+            <summary>
+            Timestamp of the message
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.Chat.SlackChatMessageResult.Error">
+            <summary>
+            Error message on failure
+            </summary>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatMessageResult.#ctor(System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ok">Indicating success or failure</param>
+            <param name="channel">Encoded channel ID</param>
+            <param name="timeStamp">Timestamp of the message</param>
+            <param name="error">Error message on failure</param>
+        </member>
+        <member name="M:Cake.Slack.Chat.SlackChatMessageResult.ToString">
+            <summary>
+            Converst this instance of value to a string representation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cake.Slack.Chat.NamespaceDoc">
+            <summary>
+            This namespace contain types used for operations using the Slack Chat API
+            </summary>
+        </member>
+        <member name="T:Cake.Slack.NamespaceDoc">
+            <summary>
+            This namespace contain types used for operations using the Slack API
+            </summary>
+        </member>
+        <member name="T:Cake.Slack.SlackProvider">
+            <summary>
+            Contains functionality related to Slack API
+            </summary>
+        </member>
+        <member name="P:Cake.Slack.SlackProvider.Chat">
+            <summary>
+            The Slack Chat functionality.
+            </summary>
+        </member>
+        <member name="M:Cake.Slack.SlackProvider.#ctor(Cake.Core.ICakeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Slack.SlackProvider"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Cake.Slack.SlackAliases">
+            <summary>
+            Contains aliases related to Slack API
+            </summary>
+        </member>
+        <member name="M:Cake.Slack.SlackAliases.Slack(Cake.Core.ICakeContext)">
+            <summary>
+            Gets a <see cref="T:Cake.Slack.SlackProvider"/> instance that can be used for communicating with Slack API.
+            </summary>
+            <param name="context">The context.</param>
+            <returns>A <see cref="T:Cake.Slack.SlackProvider"/> instance.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{EF9A252C-B360-4540-A46F-EF7BFB56DADD}"
+	ProjectSection(SolutionItems) = preProject
+		packages.config = packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9906424C-3062-40EC-89C4-991D081B1DFE}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		build.ps1 = build.ps1
+		README.md = README.md
+		setup.cake = setup.cake
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FFD276D8-DEA5-4B17-A002-F8C4A78F1745}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{751809D8-FAC8-4D2A-AD54-F306337F4E89}"
+	ProjectSection(SolutionItems) = preProject
+		nupkg\pack.bat = nupkg\pack.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{409B9A1A-00C4-4212-9BA3-19D54A8B514B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotask", "src\Autotask\Autotask.csproj", "{0E53D257-26AE-48C7-AA9E-80ED55C216A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotask.Tests", "test\Autotask.Tests\Autotask.Tests.csproj", "{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E53D257-26AE-48C7-AA9E-80ED55C216A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E53D257-26AE-48C7-AA9E-80ED55C216A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E53D257-26AE-48C7-AA9E-80ED55C216A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E53D257-26AE-48C7-AA9E-80ED55C216A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E53D257-26AE-48C7-AA9E-80ED55C216A5} = {FFD276D8-DEA5-4B17-A002-F8C4A78F1745}
+		{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB} = {409B9A1A-00C4-4212-9BA3-19D54A8B514B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9EC0D09E-E4FD-4A88-A3E7-6B118A19B3D3}
+	EndGlobalSection
+EndGlobal
