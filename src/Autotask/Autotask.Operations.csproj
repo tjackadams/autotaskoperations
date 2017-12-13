@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>This is a set of unofficial tools to interface with the Autotask Api. http://www.autotask.com/</Description>
+    <AssemblyTitle>Autotask Operations</AssemblyTitle>
+    <VersionPrefix>0.1.6</VersionPrefix>
+    <Authors>Thomas Adams</Authors>
+    <TargetFrameworks>netstandard2.0;net45;</TargetFrameworks>
+    <AssemblyName>Autotask.Operations</AssemblyName>
+    <PackageId>Autotask</PackageId>
+    <PackageTags>autotask</PackageTags>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cake.Recipe" Version="0.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Operations\" />
+  </ItemGroup>
+</Project>

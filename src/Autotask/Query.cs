@@ -1,4 +1,4 @@
-﻿namespace Autotask
+﻿namespace Autotask.Operations
 {
     using System;
     using System.Linq;

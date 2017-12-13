@@ -1,0 +1,8 @@
+create:
+   include-footer:  false
+issue-labels-include:
+- Bug
+- Feature
+- Improvement
+issue-labels-exclude:
+- Internal Refactoring
