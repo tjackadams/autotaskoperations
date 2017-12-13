@@ -10,7 +10,8 @@ BuildParameters.SetParameters(context: Context,
                             repositoryOwner: "tjackadams",
                             repositoryName: "autotaskoperations",
                             appVeyorAccountName: "tjackadams",
-							testDirectoryPath: "./test");
+							testDirectoryPath: "./test",
+							nuspecFilePath: "./nuspec/nuget/Autotask.Operations.nuspec");
 
 BuildParameters.PrintParameters(Context);
 
