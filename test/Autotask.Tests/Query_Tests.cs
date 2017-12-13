@@ -1,5 +1,6 @@
 ﻿namespace Autotask.Tests
 {
+    using System.Linq;
     using System.Xml.Linq;
     using Operations;
     using Shouldly;
@@ -8,7 +9,7 @@
     public class Query_Tests
     {
         [Fact]
-        public void Check_Entity_Element()
+        public void Generate_GreaterThan_ShouldOutputCorrectXml()
         {
             // Arrange
             const string stringQuery = "Contract id GreaterThan 0";
@@ -17,34 +18,9 @@
             XDocument output = Query.Generate(stringQuery);
 
             // Assert
-            const string expectedOutput = @"<queryxml version=""1.0"">
-  <entity>Contract</entity>
-  <query>
-    <field>id<expression op=""GreaterThan"">0</expression></field>
-  </query>
-</queryxml>";
+            var expectedOutput = XDocument.Parse("<queryxml version=\"1.0\">\r\n  <entity>Contract</entity>\r\n  <query>\r\n    <field>id<expression op=\"GreaterThan\">0</expression></field>\r\n  </query>\r\n</queryxml>");
 
-            output.ToString().ShouldBe(expectedOutput);
-        }
-
-        [Fact]
-        public void Check_Query_Element()
-        {
-            // Arrange
-            const string stringQuery = "Contract id GreaterThan 0";
-
-            // Act
-            XDocument output = Query.Generate(stringQuery);
-
-            // Assert
-            const string expectedOutput = @"<queryxml version=""1.0"">
-  <entity>Contract</entity>
-  <query>
-    <field>id<expression op=""GreaterThan"">0</expression></field>
-  </query>
-</queryxml>";
-
-            output.ToString().ShouldBe(expectedOutput);
+            Normalize(output).ShouldBe(Normalize(expectedOutput));
         }
 
         [Fact]
@@ -59,6 +35,14 @@
             // Assert
             output.ShouldNotBeNull();
             output.ShouldBeOfType<XDocument>();
+        }
+
+        private static string Normalize(XDocument source)
+        {
+            var sourceWithoutLineBreaks = source.ToString().Replace("\r\n", string.Empty).Replace("\r", string.Empty).Replace("\n", string.Empty);
+            return new string(sourceWithoutLineBreaks.ToCharArray()
+                .Where(c => !char.IsWhiteSpace(c))
+                .ToArray());
         }
     }
 }
