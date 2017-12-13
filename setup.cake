@@ -11,8 +11,7 @@ BuildParameters.SetParameters(context: Context,
                             repositoryName: "autotaskoperations",
                             appVeyorAccountName: "tjackadams",
 							testDirectoryPath: "./test",
-							nuspecFilePath: "./nuspec/nuget/Autotask.Operations.nuspec",
-							isPublicRepository: false);
+							nuspecFilePath: "./nuspec/nuget/Autotask.Operations.nuspec");
 
 BuildParameters.PrintParameters(Context);
 
