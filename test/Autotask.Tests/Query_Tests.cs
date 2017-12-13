@@ -10,56 +10,54 @@
         public void Check_Entity_Element()
         {
             // Arrange
-            string stringQuery = "Contract id GreaterThan 0";
+            const string stringQuery = "Contract id GreaterThan 0";
 
             // Act
-            var output = Query.Generate(stringQuery);
+            XDocument output = Query.Generate(stringQuery);
 
             // Assert
-            output.Root.Element("entity").ShouldNotBeNull();
-            output.Root.Element("entity").Value.ShouldBe("Contract");
+            const string expectedOutput = @"<queryxml version=""1.0"">
+  <entity>Contract</entity>
+  <query>
+    <field>id<expression op=""GreaterThan"">0</expression></field>
+  </query>
+</queryxml>";
+
+            output.ToString().ShouldBe(expectedOutput);
         }
 
         [Fact]
         public void Check_Query_Element()
         {
             // Arrange
-            string stringQuery = "Contract id GreaterThan 0";
+            const string stringQuery = "Contract id GreaterThan 0";
 
             // Act
-            var output = Query.Generate(stringQuery);
+            XDocument output = Query.Generate(stringQuery);
 
             // Assert
-            output.Root.Element("query").ShouldNotBeNull();
-            output.Root.Element("query").Element("field").ShouldNotBeNull();
-            var t = output.Root.Element("query").Element("field").Value;
-            output.Root.Element("query").Element("field").Element("expression").ShouldNotBeNull();
+            const string expectedOutput = @"<queryxml version=""1.0"">
+  <entity>Contract</entity>
+  <query>
+    <field>id<expression op=""GreaterThan"">0</expression></field>
+  </query>
+</queryxml>";
+
+            output.ToString().ShouldBe(expectedOutput);
         }
 
         [Fact]
         public void Should_Be_XDocument()
         {
             // Arrange
-            string stringQuery = "Contract id GreaterThan 0";
+            const string stringQuery = "Contract id GreaterThan 0";
 
             // Act
-            var output = Query.Generate(stringQuery);
-
-            // Assert
-            output.ShouldBeOfType<XDocument>();
-        }
-
-        [Fact]
-        public void Should_Not_Be_Null()
-        {
-            // Arrange
-            string query = "Contract id GreaterThan 0";
-
-            // Act
-            var output = Query.Generate(query);
+            XDocument output = Query.Generate(stringQuery);
 
             // Assert
             output.ShouldNotBeNull();
+            output.ShouldBeOfType<XDocument>();
         }
     }
 }

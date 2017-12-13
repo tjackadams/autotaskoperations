@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{EF9A252C-B360-4540-A46F-EF7BFB56DADD}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,13 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		Build.ps1 = Build.ps1
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FFD276D8-DEA5-4B17-A002-F8C4A78F1745}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Autotask", "src\Autotask\Autotask.xproj", "{0E53D257-26AE-48C7-AA9E-80ED55C216A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{751809D8-FAC8-4D2A-AD54-F306337F4E89}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{751809D8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{409B9A1A-00C4-4212-9BA3-19D54A8B514B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Autotask.Tests", "test\Autotask.Tests\Autotask.Tests.xproj", "{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotask", "src\Autotask\Autotask.csproj", "{0E53D257-26AE-48C7-AA9E-80ED55C216A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autotask.Tests", "test\Autotask.Tests\Autotask.Tests.csproj", "{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,5 +49,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0E53D257-26AE-48C7-AA9E-80ED55C216A5} = {FFD276D8-DEA5-4B17-A002-F8C4A78F1745}
 		{79F29572-ADF0-4A1F-9991-15FDCEA0BBAB} = {409B9A1A-00C4-4212-9BA3-19D54A8B514B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9EC0D09E-E4FD-4A88-A3E7-6B118A19B3D3}
 	EndGlobalSection
 EndGlobal
