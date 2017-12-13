@@ -6,15 +6,16 @@ Environment.SetVariableNames();
 BuildParameters.SetParameters(context: Context,
                             buildSystem: BuildSystem,
                             sourceDirectoryPath: "./",
-                            title: "Autotask.Operations",
+                            title: "Autotask",
                             repositoryOwner: "tjackadams",
                             repositoryName: "autotaskoperations",
-                            appVeyorAccountName: "tjackadams");
+                            appVeyorAccountName: "tjackadams",
+							testDirectoryPath: "./test");
 
 BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context,
-                            dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Autotask/**/*.AssemblyInfo.cs"  },
+                            dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Autotask/**/*.AssemblyInfo.cs",  BuildParameters.RootDirectoryPath + "/test/Autotask.Tests/**/*.AssemblyInfo.cs" },
                             testCoverageFilter: "+[*]* -[xunit.*]* -[Autotask.Tests]* -[*.Tests]* ",
                             testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
                             testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");

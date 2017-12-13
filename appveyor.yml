@@ -1,22 +1,32 @@
-version: '{build}'  
-pull_requests:  
-  do_not_increment_build_number: true
-branches:  
+#---------------------------------#
+#  Build Image                    #
+#---------------------------------#
+image: Visual Studio 2017
+
+#---------------------------------#
+#  Build Script                   #
+#---------------------------------#
+build_script:
+  - ps: .\build.ps1 -Target AppVeyor
+
+# Tests
+test: off
+
+#---------------------------------#
+#        Branches to build        #
+#---------------------------------#
+branches:
+  # Whitelist
   only:
-  - master
-nuget:  
-  disable_publish_on_pr: true
-build_script:  
-- ps: .\Build.ps1
-test: off  
-artifacts:  
-- path: .\artifacts\**\*.nupkg
-  name: NuGet
-deploy:  
-- provider: NuGet
-  name: production
-  api_key:
-    secure: xUVgtR25DMHiIsJ1GyegDYynwk8sSWeCJaheTnJMZ5mSE3qqoaa8Pmerf6N1jjMj
-  on:
-    branch: master
-    appveyor_repo_tag: true
+    - dev
+    - master
+    - /release/.*/
+    - /hotfix/.*/
+
+#---------------------------------#
+#  Build Cache                    #
+#---------------------------------#
+cache:
+- src\packages -> src\**\packages.config
+- Setup -> setup.cake
+- Tools -> build.ps1
