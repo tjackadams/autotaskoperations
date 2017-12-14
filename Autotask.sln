@@ -32,7 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{56F889
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{FEB7488E-9CC8-4651-8D55-101E63B0E472}"
 	ProjectSection(SolutionItems) = preProject
-		Autotask.Operations.nuspec = Autotask.Operations.nuspec
+		nuspec\nuget\Autotask.Operations.nuspec = nuspec\nuget\Autotask.Operations.nuspec
 	EndProjectSection
 EndProject
 Global
