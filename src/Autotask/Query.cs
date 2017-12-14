@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Xml.Linq;
+    using Constants;
     using Extensions;
 
     /// <summary>
@@ -23,14 +24,9 @@
             string[] queryText = queryString.Split(RegexOptions.Multiline);
 
             // allowed operators
-            string[] operators = {"and", "or", "begin"};
-            string[] conditions =
-            {
-                "Equals", "NotEqual", "GreaterThan", "LessThan", "GreaterThanOrEquals", "LessThanOrEquals",
-                "BeginsWith", "EndsWith", "Contains", "IsNotNull", "IsNull", "IsThisDay", "Like",
-                "NotLike", "SoundsLike"
-            };
-            string[] noValueNeededCondition = {"IsNotNull", "IsNull", "IsThisDay"};
+            var operators = Operators.Get;
+            var conditions = Conditions.Get;
+            var noValueNeededCondition = Conditions.GetNoValue;
 
             // create the xml document
             XDocument xml = new XDocument();
@@ -56,23 +52,23 @@
 
             // create an index pointer that starts on the second element
             // of the queryText array
-            for (int i = 1; i < queryText.Count(); i++)
+            for (int i = 1; i < queryText.Length; i++)
             {
                 var currentText = queryText[i];
 
-                if (operators.Contains(currentText, StringComparer.OrdinalIgnoreCase))
+                if (operators.Contains(currentText))
                 {
                     // element is an operator. Add a condition tag with
                     // attribute 'operator' set to the value of element
                     var condition = new XElement("condition");
-                    if (currentText == "begin")
+                    if (currentText.Equals(Operators.Begin, StringComparison.OrdinalIgnoreCase))
                     {
                         // add nested condition
                         node?.Add(condition);
                         node = condition;
                         condition = new XElement("condition");
                     }
-                    if (currentText.Contains("or") || currentText.Contains("and"))
+                    if (currentText.Equals(Operators.Or,StringComparison.OrdinalIgnoreCase) || currentText.Equals(Operators.And, StringComparison.OrdinalIgnoreCase))
                     {
                         condition.SetAttributeValue("operator", currentText);
                     }
@@ -84,11 +80,11 @@
                     // should be nested inside the condition tag.
                     node = condition;
                 }
-                else if (string.Equals(currentText, "end", StringComparison.OrdinalIgnoreCase))
+                else if (currentText.Equals(Operators.End, StringComparison.OrdinalIgnoreCase))
                 {
                     node = node?.Parent;
                 }
-                else if (conditions.Contains(currentText, StringComparer.OrdinalIgnoreCase))
+                else if (conditions.Contains(currentText))
                 {
                     // element is a condition. Add an expression tag with
                     // attribute 'op' set to the value of the element
