@@ -4,5 +4,5 @@ issue-labels-include:
 - Bug
 - Feature
 - Improvement
-issue-labels-exclude:
+- Documentation
 - Internal Refactoring
