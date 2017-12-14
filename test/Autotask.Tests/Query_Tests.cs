@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Xml.Linq;
     using Operations;
+    using Operations.Constants;
     using Shouldly;
     using Xunit;
 
@@ -19,6 +20,21 @@
 
             // Assert
             var expectedOutput = XDocument.Parse("<queryxml version=\"1.0\">\r\n  <entity>Contract</entity>\r\n  <query>\r\n    <field>id<expression op=\"GreaterThan\">0</expression></field>\r\n  </query>\r\n</queryxml>");
+
+            Normalize(output).ShouldBe(Normalize(expectedOutput));
+        }
+
+        [Fact]
+        public void Generate_EqualTo_ShouldOutputCorrectXml()
+        {
+            // Arrange
+            string stringQuery = $"Contract id {Conditions.EqualTo} 0";
+
+            // Act
+            XDocument output = Query.Generate(stringQuery);
+
+            // Assert
+            var expectedOutput = XDocument.Parse("<queryxml version=\"1.0\">\r\n  <entity>Contract</entity>\r\n  <query>\r\n    <field>id<expression op=\"Equals\">0</expression></field>\r\n  </query>\r\n</queryxml>");
 
             Normalize(output).ShouldBe(Normalize(expectedOutput));
         }
