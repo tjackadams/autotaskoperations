@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>1.0.0.0</VersionPrefix>
-    <TargetFrameworks>netcoreapp2.0;net45;</TargetFrameworks>
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <TargetFrameworks>net452;netcoreapp2.0;</TargetFrameworks>
     <AssemblyName>Autotask.Tests</AssemblyName>
     <PackageId>Autotask.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -14,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.3.1" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
