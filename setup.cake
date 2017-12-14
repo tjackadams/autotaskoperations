@@ -5,7 +5,9 @@ Environment.SetVariableNames();
 
 BuildParameters.SetParameters(context: Context,
                             buildSystem: BuildSystem,
-                            sourceDirectoryPath: "./",
+                            sourceDirectoryPath: "./src",
+							solutionFilePath: "./Autotask.sln",
+							solutionDirectoryPath: "./",
                             title: "Autotask",
                             repositoryOwner: "tjackadams",
                             repositoryName: "autotaskoperations",
